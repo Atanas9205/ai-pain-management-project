@@ -1,0 +1,47 @@
+# ===============================
+# Project-wide Configuration File
+# ===============================
+
+project:
+  seed: 42                         # Random seed for reproducibility
+  output_dir: "artifacts"          # Directory to store model artifacts, logs, etc.
+
+data:
+  raw_dir: "data/raw"               # Directory for raw input data
+  interim_dir: "data/interim"       # Directory for intermediate processed data
+  processed_dir: "data/processed"   # Directory for final cleaned data
+  synth_rows: 5000                  # If no raw CSVs exist, synthetic data will be generated with this number of rows
+  
+  # Expected columns for physiological + hormonal signals
+  features: ["heart_rate", "skin_conductance", "cortisol_level"]  # Input features
+  target: "pain_level"              # Output target column
+  # pain_level encoding: 0 = low, 1 = moderate, 2 = high
+
+split:
+  test_size: 0.2                    # Fraction of data to use for testing
+  stratify: true                    # Maintain class distribution between train/test sets
+
+preprocess:
+  imputer_strategy: "median"        # Strategy to fill missing values: "mean", "median", or "most_frequent"
+  scaler: "standard"                # Scaling method: "standard" or "minmax"
+
+modeling:
+  task: "classification"            # "classification" or "regression"
+
+  models:
+    logistic_regression:
+      C: 1.0
+      max_iter: 200
+      class_weight: "balanced"
+    
+    random_forest:
+      n_estimators: 200
+      max_depth: 10
+      random_state: 42
+    
+    xgboost:
+      n_estimators: 300
+      learning_rate: 0.05
+      max_depth: 6
+      subsample: 0.8
+      colsample_bytree: 0.8

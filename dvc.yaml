@@ -1,0 +1,28 @@
+stages:
+  prepare_data:
+    cmd: python src/data/prepare_data.py --config config/config.yaml
+    deps:
+      - src/data/prepare_data.py
+      - config/config.yaml
+    outs:
+      - data/interim
+      - data/processed
+
+  train_model:
+    cmd: python src/models/train_model.py --config config/config.yaml
+    deps:
+      - src/models/train_model.py
+      - data/processed
+      - config/config.yaml
+    outs:
+      - artifacts/model.pkl
+      - artifacts/metrics.json
+
+  evaluate_model:
+    cmd: python src/models/evaluate_model.py --config config/config.yaml
+    deps:
+      - src/models/evaluate_model.py
+      - artifacts/model.pkl
+      - config/config.yaml
+    outs:
+      - artifacts/evaluation_report.json
