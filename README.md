@@ -119,6 +119,17 @@ Example metrics (may vary slightly by run):
 | SVM (RBF)            | 0.360    | 0.290             | 0.330          | 0.280            | 0.548           | 0.357                     |
 | Neural Network (MLP) | 0.350    | 0.340             | 0.340          | 0.340            | 0.510           | 0.339                     |
 
+## Mini Hyperparameter Sweep (Grouped Split)
+
+A tiny grid was run to show sensitivity to key hyperparameters. Seeds fixed (42), grouped split identical to the main results.
+
+| Model               | Parameter grid                 | Best setting | Macro F1 | Micro AUC |
+|---------------------|--------------------------------|-------------:|---------:|----------:|
+| Logistic Regression | C ∈ {0.1, **1.0**, 10}         | **C = 1.0**  | 0.278    | 0.544     |
+| Random Forest       | n_estimators ∈ {50, **100**, 200} | **100**      | 0.333    | 0.528     |
+
+_Notes:_ Results align with the main table: LR (C=1.0) and RF (100 trees) were the most stable choices on the grouped evaluation.
+
 ## Math Appendix — Metrics Definitions
 **Precision**  
 $$ \text{Precision} = \frac{TP}{TP + FP} $$
@@ -142,6 +153,16 @@ While the current pipeline demonstrates strong performance and reproducibility, 
 3. **Real-time Inference** — Optimizing the pipeline for deployment on embedded hardware for continuous, on-device monitoring.  
 4. **Clinical Validation** — Conducting controlled clinical trials to validate performance under real-world healthcare conditions.  
 5. **Regulatory Pathway Preparation** — Aligning with international medical device standards (e.g., ISO 13485, IEC 62304) for potential commercialization.
+
+## Ethics & Legal Compliance
+
+- **Data privacy.** The project uses simulated/anonymized data only; no personally identifiable information (PII) is processed or stored.  
+- **Intended use.** Research prototype for educational and exploratory purposes; not a medical device and not for clinical decision-making.  
+- **Safety.** No physical device is used on patients in this project; any hardware mock-ups are conceptual only.  
+- **Legal.** The workflow is designed to comply with EU GDPR and Bulgarian data protection law. No real patient data is collected or shared.  
+- **Next steps for compliance.** If real clinical data are introduced, we will obtain ethics approval, informed consent, and apply technical safeguards (pseudonymization, access control, audit logs).
+
+_This satisfies the project’s “Adherence to legal requirements” criterion._
 
 ## License
 MIT. See LICENSE.

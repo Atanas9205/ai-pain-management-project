@@ -1,0 +1,52 @@
+project:
+  seed: 42                              # Random seed for reproducibility
+  output_dir: "assets/outputs"          # Where to store pipeline outputs
+
+logging:
+  verbosity: "INFO"                     # Logging level: DEBUG | INFO | WARNING | ERROR
+
+data:
+  raw_dir: "data/raw"                    # Directory with raw CSV files
+  synth_rows: 800                        # Number of synthetic rows (if applicable)
+  features:                              # Features used in the model
+    - eda_uS
+    - heart_rate_bpm
+    - skin_temp_C
+    - cortisol_ug_dL
+    - condition                          # Keep categorical feature, will be encoded
+  target: "pain_level"                   # Target column name
+
+split:
+  test_size: 0.25                        # Test set proportion
+  stratify: true                         # Whether to stratify split based on target
+
+preprocess:                              # Preprocessing configuration
+  numeric_imputer_strategy: "constant"   # mean | median | constant
+  numeric_imputer_fill_value: 0           # used if strategy = constant
+  categorical_imputer_strategy: "most_frequent"  # For categorical columns
+  scaler: "standard"                     # standard | minmax | robust
+  encode_categorical: true               # Apply OneHotEncoder to categorical columns
+  categorical_cols: ["condition"]        # Explicitly mark categorical features
+
+modeling:                                # Modeling configuration
+  models:
+    logistic_regression:
+      C: 1.0
+      max_iter: 1000
+    random_forest:
+      n_estimators: 100
+      max_depth: null
+      random_state: 42
+    xgboost:
+      use_label_encoder: false
+      eval_metric: "logloss"
+      max_depth: 6
+    svm_rbf:
+      kernel: "rbf"
+      probability: true
+    mlp:
+      hidden_layer_sizes: [64, 32]
+      max_iter: 500
+
+viz:
+  save_dir: "assets/figures"             # Where to store plots and charts
