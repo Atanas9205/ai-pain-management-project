@@ -166,3 +166,12 @@ _This satisfies the project’s “Adherence to legal requirements” criterion.
 
 ## License
 MIT. See LICENSE.
+
+## Data Science & Machine Learning Integration
+This project bridges the core concepts from the **Data Science** module (data collection, cleaning, preprocessing, feature engineering, exploratory data analysis) with the **Machine Learning** module (model training, hyperparameter tuning, evaluation, and deployment-ready pipeline design).
+
+In this workflow:
+- **Data Science** skills were applied in the data preparation stages: loading raw CSV files, merging them, handling missing values, and performing grouped splits to prevent subject data leakage.
+- **Machine Learning** skills were applied in building multiple model pipelines (Logistic Regression, Random Forest, XGBoost, SVM, MLP), training them, and evaluating their performance with appropriate metrics.
+- The integration demonstrates how a Data Science process evolves naturally into a Machine Learning solution for a real-world-style problem.
+
