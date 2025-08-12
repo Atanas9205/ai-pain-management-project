@@ -204,6 +204,26 @@ Area under the ROC curve, computed as the integral of TPR over FPR.
 
 ---
 
+## Design decisions (short)
+- Picked **grouped train/test split** to avoid subject leakage after I noticed inflated accuracy with a plain random split.
+- Kept **Logistic Regression** as the default baseline due to stable macro-F1 and ease of interpretation.
+- Temporarily removed the `condition` categorical column from features to resolve a type mismatch; will re-enable with proper encoding.
+
+## What didn't work (yet)
+- **XGBoost on macOS** needed `libomp`; I installed it with `brew install libomp`, but I keep it optional for portability.
+- **MLP** initially overfit the small synthetic set; reduced layer sizes and relied on scaling + simpler baselines.
+
+## Repro notes (my machine)
+- macOS Sonoma 14.x, Conda Python 3.9, scikit-learn 1.5.x
+- CPU only; end-to-end run ~45–60s on MacBook Air (M-series).
+- Final modeling table: **~3,750 rows × 5 numeric features** after dropping NaNs in `pain_level`.
+
+## References (short)
+- scikit-learn User Guide: Pipelines & Model Evaluation.
+- XGBoost docs (macOS `libomp` note).
+
+---
+
 ## Future Work
 While the current pipeline demonstrates strong performance and reproducibility, several directions can further enhance its clinical relevance and robustness:
 
