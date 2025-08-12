@@ -2,6 +2,47 @@
 
 A reproducible pipeline for training and evaluating ML models that classify pain intensity levels (low, moderate, high) from multimodal biosignals (EDA, heart rate, skin temperature) and contextual variables (condition, cortisol). The project includes a notebook for exploration and a Python pipeline for end-to-end runs.
 
+<div align="center"> 
+<h2>Abstract</h2> 
+</div> 
+
+<p align="justify"> 
+In this project, I developed a reproducible workflow for classifying pain levels using affordable physiological signals. Since no suitable public dataset was available, I created a synthetic dataset with realistic ranges for electrodermal activity (EDA – Electrodermal Activity), heart rate (HR – Heart Rate), skin temperature, cortisol levels, a simple condition variable, and a target pain level (low, moderate, high).
+</p> 
+
+<p align="justify"> 
+The data were split using a grouped strategy to avoid information leakage between subjects. I tested several baseline models — Logistic Regression, Random Forest, SVM with RBF kernel (Support Vector Machine with Radial Basis Function kernel), and a small Multi-Layer Perceptron (MLP – Multi-Layer Perceptron neural network) — all implemented through scikit-learn pipelines with preprocessing steps like imputation and scaling. Model performance was measured with common multi-class metrics (macro F1, accuracy) and ranking metrics (micro ROC-AUC – Receiver Operating Characteristic Area Under the Curve, micro average precision).
+</p> 
+
+<p align="justify"> 
+On this synthetic dataset, Logistic Regression provided the most stable balance between precision and recall, making it a reasonable starting point due to its simplicity and interpretability. The current version focuses on clarity and reproducibility, with future improvements planned for using real-world data, better calibration, and fairness checks across different conditions.
+</p> 
+
+<p><strong>Keywords:</strong> pain assessment, EDA (Electrodermal Activity), heart rate (HR – Heart Rate), skin temperature, cortisol, grouped split, macro-F1, reproducibility.</p>
+
+<div align="center"> 
+<h2>Introduction</h2> 
+</div> 
+
+<p align="justify"> 
+Pain is not just a symptom – it is a constant companion that can deeply affect the daily lives of people living with neurodegenerative diseases. For someone with Multiple Sclerosis (MS – Multiple Sclerosis), even a short walk can feel exhausting. For those with Parkinson’s Disease (PD – Parkinson’s Disease), stiffness and discomfort can overshadow moments of clarity. And for patients with Amyotrophic Lateral Sclerosis (ALS – Amyotrophic Lateral Sclerosis), pain might remain in the background, but it is just as exhausting as the more visible symptoms.
+</p> 
+
+<p align="justify"> 
+Despite medical advances, the assessment of pain still relies heavily on patient self-reporting. This method has limitations — some patients struggle to describe their sensations, and pain itself changes in intensity and character over time. In conditions that affect movement, cognition, and emotions, this makes the job of clinicians even more challenging.
+</p> 
+
+<p align="justify"> 
+In this project, I propose a more objective approach. By collecting different types of data — physiological signals, hormone levels, and patient-reported information — and applying machine learning (ML – Machine Learning) algorithms, we can build a system that more accurately detects pain levels. This approach listens not only to what patients say, but also to what their bodies reveal.
+</p> 
+
+<p align="justify"> 
+I believe that this method can change the way pain is tracked in neurodegenerative diseases — shifting from a reactive to a preventive approach, ultimately helping improve patients’ quality of life.
+</p>
+
+
+---
+
 ## Folder Structure
 ```
 ai-pain-management-project/
@@ -24,10 +65,14 @@ ai-pain-management-project/
 └─ README.md
 ```
 
+---
+
 ## Tools and Libraries
 - Python 3.9, NumPy, Pandas, scikit-learn, XGBoost, Matplotlib
 - JupyterLab for interactive work
 - (Optional) DVC/MLflow compatible structure if you want to extend experiment tracking
+
+---
 
 ## Quick Start
 
@@ -75,6 +120,8 @@ The pipeline will:
 - Evaluate with Accuracy, Precision (macro), Recall (macro), F1 (macro), ROC-AUC (micro), AP (micro)
 - Save figures and reports (see next section)
 
+---
+
 ## Expected Outputs
 After running either the notebook or `run_pipeline.py`, you should see:
 
@@ -95,11 +142,15 @@ assets/reports/
   confusion_matrices/
 ```
 
+---
+
 ## Data
 Raw CSVs live in `data/raw/`:
 - eda.csv, ecg_hr.csv, skin_temp.csv, cortisol.csv, labels.csv
 
 Merged dataset is stored as `merged_clean.csv` in `data/interim/` and `data/processed/`.
+
+---
 
 ## Models and Hyperparameters
 All models are instantiated with stable seeds (`random_state=42` where applicable):
@@ -108,6 +159,8 @@ All models are instantiated with stable seeds (`random_state=42` where applicabl
 - XGBoost: `use_label_encoder=False`, `eval_metric='logloss'`
 - SVM (RBF): `kernel='rbf'`, `probability=True`
 - MLP: `hidden_layer_sizes=(64, 32)`, `max_iter=500`
+
+---
 
 ## Results (Grouped Split)
 Example metrics (may vary slightly by run):
@@ -119,6 +172,8 @@ Example metrics (may vary slightly by run):
 | SVM (RBF)            | 0.360    | 0.290             | 0.330          | 0.280            | 0.548           | 0.357                     |
 | Neural Network (MLP) | 0.350    | 0.340             | 0.340          | 0.340            | 0.510           | 0.339                     |
 
+---
+
 ## Mini Hyperparameter Sweep (Grouped Split)
 
 A tiny grid was run to show sensitivity to key hyperparameters. Seeds fixed (42), grouped split identical to the main results.
@@ -129,6 +184,8 @@ A tiny grid was run to show sensitivity to key hyperparameters. Seeds fixed (42)
 | Random Forest       | n_estimators ∈ {50, **100**, 200} | **100**      | 0.333    | 0.528     |
 
 _Notes:_ Results align with the main table: LR (C=1.0) and RF (100 trees) were the most stable choices on the grouped evaluation.
+
+---
 
 ## Math Appendix — Metrics Definitions
 **Precision**  
@@ -145,6 +202,8 @@ Area under the ROC curve, computed as the integral of TPR over FPR.
 
 **Explanation**: These metrics quantify classification performance from different perspectives — Precision measures correctness of positive predictions, Recall measures coverage of actual positives, F1 balances both, and AUC measures overall ranking quality across thresholds.
 
+---
+
 ## Future Work
 While the current pipeline demonstrates strong performance and reproducibility, several directions can further enhance its clinical relevance and robustness:
 
@@ -153,6 +212,8 @@ While the current pipeline demonstrates strong performance and reproducibility, 
 3. **Real-time Inference** — Optimizing the pipeline for deployment on embedded hardware for continuous, on-device monitoring.  
 4. **Clinical Validation** — Conducting controlled clinical trials to validate performance under real-world healthcare conditions.  
 5. **Regulatory Pathway Preparation** — Aligning with international medical device standards (e.g., ISO 13485, IEC 62304) for potential commercialization.
+
+---
 
 ## Ethics & Legal Compliance
 
@@ -164,8 +225,12 @@ While the current pipeline demonstrates strong performance and reproducibility, 
 
 _This satisfies the project’s “Adherence to legal requirements” criterion._
 
+---
+
 ## License
 MIT. See LICENSE.
+
+---
 
 ## Data Science & Machine Learning Integration
 This project bridges the core concepts from the **Data Science** module (data collection, cleaning, preprocessing, feature engineering, exploratory data analysis) with the **Machine Learning** module (model training, hyperparameter tuning, evaluation, and deployment-ready pipeline design).
