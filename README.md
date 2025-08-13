@@ -260,3 +260,229 @@ In this workflow:
 - **Machine Learning** skills were applied in building multiple model pipelines (Logistic Regression, Random Forest, XGBoost, SVM, MLP), training them, and evaluating their performance with appropriate metrics.
 - The integration demonstrates how a Data Science process evolves naturally into a Machine Learning solution for a real-world-style problem.
 
+## Review of Related Work
+
+### [1] Fernandez-Rojas et al., *A Systematic Review of Neurophysiological Sensing for the Assessment of Acute Pain* (npj Digital Medicine, 2023)  
+**Goal:** Survey neurophysiological and physiological sensing methods for acute pain assessment, focusing on AI approaches.  
+**Method:** Reviewed multimodal sensing (EDA, EEG, fNIRS, HRV, etc.) and deep learning techniques.  
+**Results:** Identified dataset scarcity, inconsistent validation methods, and strong potential for multimodal deep learning.  
+**Relevance:** Supports our motivation for synthetic data generation and the focus on affordable physiological signals.  
+[Full text](https://doi.org/10.1038/s41746-023-00810-1)
+
+---
+
+### [2] Fernandez-Rojas et al., *Multimodal Physiological Sensing for the Assessment of Acute Pain* (Frontiers in Pain Research, 2023)  
+**Goal:** Experimentally compare EDA, PPG, and respiration for acute pain detection.  
+**Method:** 22-subject cold pressor + other tasks; statistical and ML analysis of modalities.  
+**Results:** EDA outperformed PPG and respiration across conditions; recommended as primary modality for tool design.  
+**Relevance:** Validates our selection of EDA as a key feature in our pipeline.  
+[Full text](https://doi.org/10.3389/fpain.2023.1150264)
+
+---
+
+### [3] Gkikas & Tsiknakis, *Automatic Assessment of Pain Based on Deep Learning Methods: A Systematic Review* (Computer Methods and Programs in Biomedicine, 2023)  
+**Goal:** Review deep learning (DL) methods for pain assessment.  
+**Method:** Compared DL vs classical ML approaches; analyzed challenges in data and evaluation.  
+**Results:** DL generally outperforms classical methods but struggles with small datasets and poor generalization; calls for standardized validation protocols.  
+**Relevance:** Reinforces the importance of reproducible pipelines and careful evaluation, which we adopt.  
+[Full text](https://doi.org/10.1016/j.cmpb.2023.107365)
+
+---
+
+### [4] Gkikas et al., *Multimodal Automatic Assessment of Acute Pain through Facial Videos and Heart Rate Signals Utilizing Transformer-Based Architectures* (Frontiers in Pain Research, 2024)  
+**Goal:** Combine facial video and heart rate for acute pain detection.  
+**Method:** Transformer-based fusion architecture tested on multimodal datasets.  
+**Results:** Multimodal fusion outperforms unimodal approaches.  
+**Relevance:** Suggests future directions for our project if we expand to richer data sources.  
+[Full text](https://doi.org/10.3389/fpain.2024.1372814)
+
+---
+
+### [5] Gkikas et al., *PainFormer: A Vision Foundation Model for Automatic Pain Assessment* (arXiv, 2025)  
+**Goal:** Develop a foundation model for pain assessment across modalities and tasks.  
+**Method:** Multi-task, multi-modal architecture trained on multiple datasets; leverages transfer learning.  
+**Results:** Achieves state-of-the-art (SOTA) performance on multiple benchmarks.  
+**Relevance:** Highlights potential of foundation models for generalizable pain assessment; relevant for long-term project goals.  
+[Full text](https://arxiv.org/abs/2505.01571)
+
+### [6] Gkikas et al., *Efficient Pain Recognition via Respiration Signals* (arXiv, 2025)  
+**Goal:** Use respiration as the primary modality for pain recognition with a compact transformer model.  
+**Method:** Multi-window fusion pipeline with single cross-attention transformer; tested on controlled datasets.  
+**Results:** Achieved competitive accuracy while keeping computational cost low.  
+**Relevance:** Supports using lightweight transformer models for single-modality scenarios like ours in early stages.  
+[Full text](https://arxiv.org/abs/2507.21886)
+
+---
+
+### [7] Khan et al., *A Systematic Review of Multimodal Signal Fusion for Acute Pain Assessment Systems* (ACM Computing Surveys, 2025)  
+**Goal:** Review fusion strategies for combining multiple biosignals in acute pain assessment.  
+**Method:** Surveyed over 70 studies, comparing early-, mid-, and late-fusion approaches.  
+**Results:** Multimodal fusion improves robustness but increases complexity and data requirements.  
+**Relevance:** Informs our design trade-offs — start simple, scale to multimodal only when data availability improves.  
+[Full text](https://doi.org/10.1145/3737281)
+
+---
+
+### [8] Kim et al., *Estimation of Pressure Pain in the Lower Limbs Using EDA, Tissue Oxygen Saturation, and HRV* (Sensors, 2025)  
+**Goal:** Quantify pressure-induced pain using non-invasive physiological signals.  
+**Method:** Measured EDA, StO₂, and HRV under increasing pressure on lower limbs; applied ML regression/classification.  
+**Results:** Physiological responses correlate strongly with subjective pain scores.  
+**Relevance:** Supports our choice of affordable physiological metrics (EDA, HRV) for pain-level prediction.  
+[Full text](https://www.mdpi.com/1424-8220/25/3/680)
+
+---
+
+### [9] Fernandez-Rojas et al., *Empirical Comparison of Deep Learning Models for fNIRS Pain Decoding* (Frontiers in Neuroinformatics, 2024)  
+**Goal:** Compare deep learning architectures for functional near-infrared spectroscopy (fNIRS)-based pain decoding.  
+**Method:** Evaluated CNN, LSTM, and hybrid CNN-LSTM on fNIRS datasets.  
+**Results:** CNN-LSTM achieved ~91% accuracy, outperforming other architectures.  
+**Relevance:** Demonstrates the value of temporal + spatial feature extraction; relevant for future expansion to richer modalities.  
+[Full text](https://www.frontiersin.org/articles/10.3389/fninf.2024.1320189/full)
+
+---
+
+### [10] Patterson et al., *Objective Wearable Measures Correlate with Self-Reported Outcomes during Spinal Cord Stimulation for Chronic Pain* (npj Digital Medicine, 2023)  
+**Goal:** Assess whether wearable-measured activity and physiology correlate with chronic pain patient-reported outcomes (PROs).  
+**Method:** Collected HR, HRV, and step count from patients undergoing spinal cord stimulation.  
+**Results:** Objective wearable metrics significantly correlate with PRO scores.  
+**Relevance:** Validates our approach to using wearable-derived physiological metrics for pain assessment.  
+[Full text](https://www.nature.com/articles/s41746-023-00892-x)
+
+### [11] Winslow et al., *Automatic detection of pain using machine learning* (Frontiers in Pain Research, 2022)  
+**Goal:** Real-time detection of acute pain from physiological signals (mainly HR/HRV, respiration) under cold pressor test (CPT).  
+**Method:** 41 participants; extracted 46 HRV/respiratory features; trained Logistic Regression for lab and field conditions.  
+**Results:** F1 ≈ 81.9% (lab) and 79.4% (field).  
+**Relevance:** Confirms that HR/HRV and respiration are valuable for low-cost sensing; supports our use of accessible biosensors and interpretable models.  
+[Full text](https://www.frontiersin.org/articles/10.3389/fpain.2022.1044518/full)
+
+---
+
+### [12] Pouromran et al., *Automatic pain recognition from BVP signal using ML* (arXiv, 2023)  
+**Goal:** Evaluate whether Blood Volume Pulse (BVP) alone carries enough information for pain detection.  
+**Method:** Extracted statistical and frequency features from BVP; trained classical ML models (SVM, RF) for binary and multi-level pain classification.  
+**Results:** BVP-only models achieve competitive accuracy; single modality can be useful with proper feature engineering.  
+**Relevance:** Strengthens our idea of a minimal, low-budget sensor set before adding multimodal fusion.  
+[Full text](https://arxiv.org/abs/2303.10607)
+
+---
+
+### [13] Lu, Ozek & Kamarthi, *Transformer Encoder with Multiscale Deep Learning for Pain Classification Using Physiological Signals* (arXiv, 2023)  
+**Goal:** Develop a transformer encoder with multiscale representation for physiological-signal-based pain classification.  
+**Method:** Multi-window temporal representations fed into transformer; compared to traditional and DL baselines.  
+**Results:** Improved accuracy over conventional approaches, especially with complex temporal dependencies.  
+**Relevance:** Indicates potential upgrade path — from baseline models to transformer-based fusion when real data is available.  
+[Full text](https://arxiv.org/abs/2303.06845)
+
+---
+
+### [14] Dehshibi et al., *Pain level and behaviour classification using GRU-based sparsely-connected RNNs* (arXiv, 2022)  
+**Goal:** Classify pain levels and behaviours with lightweight GRU RNNs using sparse connections.  
+**Method:** Introduced sparsity in GRU layers to reduce parameters; trained on physiological and behavioural datasets.  
+**Results:** Achieved solid performance with reduced model size — efficient for on-device inference.  
+**Relevance:** Fits scenarios where real-time and low-power devices are needed for pain monitoring.  
+[Full text](https://arxiv.org/abs/2212.14806)
+
+---
+
+### [15] Cohen, Vase & Hooten, *Chronic pain: burden, best practices, and new advances* (The Lancet, 2021)  
+**Goal:** Review chronic pain burden, current practices, and future directions using a biopsychosocial approach.  
+**Method:** Narrative review; global prevalence ~30%; pain types (nociceptive, neuropathic, nociplastic); therapeutic strategies.  
+**Results:** Emphasises need for objective measures, multidisciplinary care, and patient-reported outcomes.  
+**Relevance:** Provides clinical context for why our objective multimodal approach is valuable in chronic pain management.  
+[Full text](https://doi.org/10.1016/S0140-6736(21)00393-7)
+
+### [16] Vitali et al., *Sensing Behavior Change in Chronic Pain: A Scoping Review of Wearable and Passive Sensor Technologies* (Pain, 2024)  
+**Goal:** Map wearable and passive sensors used to detect behavior change in chronic pain.  
+**Method:** Scoping review of technologies capturing mobility, posture, activity profiles.  
+**Results:** Wearable sensors are promising but real-world care studies are rare.  
+**Relevance:** Highlights gap in field validation—reinforces importance of combining models with clinical scenarios.  
+[Full text link unavailable (scoping abstract only)](https://journals.lww.com/pain/fulltext/2024/06000/sensing_behavior_change_in_chronic_pain__a_scoping.16.aspx)
+
+---
+
+### [17] Ayena et al., *Predicting Chronic Pain Using Wearable Devices: A Scoping Review of Sensor Capabilities, Data Security, and Standards Compliance* (2025)  
+**Goal:** Assess wearable technology for chronic pain management, focusing on sensor quality, data security, and standards compliance.  
+**Method:** Reviewed publications on wearables for CP prediction, extracted features, standards status, security protocols.  
+**Results:** Found growing real-time monitoring capability, but data security and regulatory compliance remain under-addressed.  
+**Relevance:** Validates our plan to keep pipelines simple, reproducible, and mindful of privacy in future clinical expansion.  
+[Full text](https://www.frontiersin.org/journals/digital-health/articles/10.3389/fdgth.2025.1581285/full)
+
+---
+
+### [18] Klimek et al., *Wearables Measuring Electrodermal Activity to Assess Perceived Stress in Care: A Scoping Review* (Acta Neuropsychiatrica, 2023)  
+**Goal:** Review wearable devices that measure EDA for stress assessment in care settings.  
+**Method:** PRISMA-SCR scoping review (2012–2022), 74 studies analyzed (population, devices, body locations, ML performance).  
+**Results:** EDA wearable accuracies ranged 42%–100%, average ~82.6%, mainly offline lab studies; real-world care studies lacking.  
+**Relevance:** Supports strength of EDA but also underscores need for real-life deployment—encourages future data collection design.  
+[Full text](https://www.cambridge.org/core/journals/acta-neuropsychiatrica/article/wearables-measuring-electrodermal-activity-to-assess-perceived-stress-in-care-a-scoping-review/906D4056A5EDACAFB46D95BA1AB90822)
+
+---
+
+### [19] Kong & Chon, *Electrodermal Activity in Pain Assessment and Its Clinical Applications* (Applied Physics Reviews, 2024)  
+**Goal:** Provide a comprehensive review of EDA for objective pain assessment and clinical impact.  
+**Method:** Literature review of signal processing, ML methods, clinical protocols.  
+**Results:** EDA is closely linked to pain via sympathetic activity; growing feasibility thanks to wearables and ML—highlighted current challenges and future directions.  
+**Relevance:** Backs our choice of using EDA for pain modeling and bridges technology with clinical translation.  
+[Full text reference](https://pubs.aip.org/aip/apr/article/11/3/031316/3306943/Electrodermal-activity-in-pain-assessment-and-its)
+
+---
+
+### [20] Kristoffersson, *A Systematic Review of Wearable Sensors for Monitoring Physical Activity* (Sensors, 2022)  
+**Goal:** Catalog wearable sensor technologies for monitoring physical activity.  
+**Method:** Systematic review of sensors (accelerometers, gyroscopes, etc.) for physical movement tracking.  
+**Results:** Wearables for activity tracking are mature, reliable, and improving in accuracy and affordability.  
+**Relevance:** Suggests potential to extend our framework with accelerometer or movement-based features in the future.  
+[Full text](https://www.mdpi.com/1424-8220/22/2/573)
+
+### [21] Kristoffersson, *A Systematic Review of Wearable Sensors for Monitoring Physical Activity* (Sensors, 2022)  
+**Goal:** Review wearable technologies for physical activity monitoring.  
+**Method:** Systematic analysis of accelerometers, gyroscopes, and other movement sensors.  
+**Results:** Wearables proved mature, accurate, and increasingly affordable—suitable for clinical and consumer use.  
+**Relevance:** Suggests potential for extending our model with motion-based features in future updates.  
+[Full text](https://www.mdpi.com/1424-8220/22/2/573)
+
+---
+
+### [22] Hodges & van den Hoorn, *A Vision for the Future of Wearable Sensors in Spine Care and Its Challenges: Narrative Review* (Journal of Spine Surgery, 2022)  
+**Goal:** Present a comprehensive future vision of wearable sensor integration for managing low back pain (LBP), using AI and real-time personalized care models.  
+**Method:** Narrative review synthesizing current wearable technology (accelerometers, mHealth applications) and proposes a layered system consisting of:  
+1. Real-world sensor data (movement, posture, physiology)  
+2. Patient-reported data via apps (pain, psychological states)  
+3. Clinical and omics inputs (imaging, genomics, medical history)  
+4. AI-driven decision support  
+5. Personalized treatment plans and mHealth feedback  
+6. Continuous monitoring with iterative improvement  
+**Results:** High potential for personalization and objective monitoring, but realization depends on user-friendly devices, clinical validation, and standardization.  
+**Relevance:** Aligns with the long-term vision of evolving our baseline, reproducible pipeline into a fully integrated, AI-supported clinical system.  
+[Full text](https://jss.amegroups.org/article/view/5543/html) :contentReference[oaicite:11]{index=11}
+
+---
+
+### [23] Sena et al., *Wearable Sensors in Patient Acuity Assessment in Critical Care* (Frontiers in Neurology, 2024)  
+**Goal:** Evaluate whether integrating wrist-worn accelerometer data with demographic and clinical EHR information can enhance acuity assessment in ICU patients.  
+**Method:** 87 ICU patients wore accelerometers on the wrist; models (VGG, ResNet, MobileNet, SqueezeNet, and a Transformer) were trained using accelerometry alone, and in combination with demographics and clinical variables.  
+**Results:**  
+- SOFA score baseline: AUC ≈ 0.53  
+- Accelerometer-only: AUC ≈ 0.50, F1 ≈ 0.68  
+- Accelerometer + demographics: AUC ≈ 0.69, Precision ≈ 0.75, F1 ≈ 0.67  
+Notably, SENet performed best when including demographic data.  
+**Relevance:** Demonstrates that embedding context (e.g., demographics, clinical data) can significantly boost performance over physiological signals alone—supporting our multimodal design philosophy.  
+[Full text](https://pubmed.ncbi.nlm.nih.gov/38784909/) ([PMCID 11112699](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11112699/))
+
+---
+
+### [24] Gkikas, *A Pain Assessment Framework based on Multimodal Data and Deep Machine Learning Methods* (arXiv, 2025)  
+**Goal:** Present a comprehensive framework for automatic pain assessment that bridges clinical context (including demographics) and modern AI methods.  
+**Method:** PhD thesis consolidating unimodal and multimodal pipelines; examines demographic factors (e.g., age, sex) affecting pain perception; explores foundation and generative AI models alongside classical DL.  
+**Results:** Reports state-of-the-art results across studies included in the thesis and outlines a roadmap from simple pipelines to clinically applicable, multimodal systems.  
+**Relevance:** A “north-star” reference for scaling our baseline/reproducible pipeline toward richer modalities and clinical validation.  
+[Full text](https://arxiv.org/abs/2505.05396). :contentReference[oaicite:0]{index=0}
+
+---
+
+### [25] Gkikas et al., *Multi-Representation Diagrams for Pain Recognition: Integrating Various Electrodermal Activity Signals into a Single Image* (arXiv, 2025)  
+**Goal:** Investigate whether different representations of the same EDA signal, when combined into a single visual diagram, can serve as a powerful input modality for pain assessment.  
+**Method:** Create multiple waveform-based visualizations from EDA (e.g., filtered versions, feature mappings), fuse them into a multi-representation diagram, and feed that into an automatic pain-assessment pipeline. Tested in the context of the AI4PAIN 2025 Grand Challenge.  
+**Results:** Demonstrates that this “single-modality, multi-representation” method matches or exceeds traditional fusion of different modalities in performance, offering robustness and consistency.  
+**Relevance:** Provides an innovative, resource-efficient path for enhancing model input without adding new sensor types—especially valuable for low-cost, reproducible pipelines.  
+[Full text](https://arxiv.org/abs/2507.21881)
