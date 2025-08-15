@@ -8,7 +8,7 @@ A reproducible pipeline for training and evaluating ML models that classify pain
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Abstract](#abstract)
 - [Introduction](#introduction)
@@ -26,7 +26,7 @@ A reproducible pipeline for training and evaluating ML models that classify pain
 
 ---
 
-## 📖 Abstract
+## Abstract
 
 In this project, I developed a reproducible workflow for classifying pain levels using affordable physiological signals. Since no suitable public dataset was available, I created a synthetic dataset with realistic ranges for electrodermal activity (EDA – Electrodermal Activity), heart rate (HR – Heart Rate), skin temperature, cortisol levels, a simple condition variable, and a target pain level (low, moderate, high).
 
